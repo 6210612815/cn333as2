@@ -15,8 +15,8 @@ import com.example.mynotes.ui.main.MainViewModelFactory
 class ListDetailActivity : AppCompatActivity() {
     private lateinit var binding: ListDetailActivityBinding
     private lateinit var viewModel: MainViewModel
-    lateinit var plainText: EditText
     lateinit var sharedPreferences: SharedPreferences
+    lateinit var plainText: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,8 +27,6 @@ class ListDetailActivity : AppCompatActivity() {
         binding = ListDetailActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-
         viewModel.list = intent.getParcelableExtra(MainActivity.INTENT_LIST_KEY)!!
         title = viewModel.list.name
 
@@ -37,29 +35,21 @@ class ListDetailActivity : AppCompatActivity() {
                 .replace(R.id.container, ListDetailFragment.newInstance())
                 .commitNow()
         }
-
-
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
-
         sharedPreferences = getSharedPreferences("", Context.MODE_PRIVATE)
         var loadnote = sharedPreferences.getString(viewModel.list.name,"")
         plainText = findViewById(R.id.plainText)
         plainText.setText(loadnote)
-
         super.onPostCreate(savedInstanceState)
     }
 
-
     override fun onBackPressed() {
-
         plainText = findViewById(R.id.plainText)
         val insertedText = plainText.text.toString()
         sharedPreferences = getSharedPreferences("", Context.MODE_PRIVATE)
         sharedPreferences.edit().putString(viewModel.list.name,insertedText).apply()
-
-
         super.onBackPressed()
     }
 }

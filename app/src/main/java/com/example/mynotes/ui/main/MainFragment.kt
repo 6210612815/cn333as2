@@ -11,10 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mynotes.databinding.MainFragmentBinding
 import com.example.mynotes.models.TaskList
 
-// layout: main_activity.xml
-// Binding Class: MainActivityBinding
-// layout: main_fragment.xml
-// Binding Class: MainFragmentBinding
 class MainFragment() :
     Fragment(), ListSelectionRecyclerViewAdapter.ListSelectionRecyclerViewClickListener {
 
@@ -36,9 +32,7 @@ class MainFragment() :
         savedInstanceState: Bundle?
     ): View {
         binding = MainFragmentBinding.inflate(inflater, container, false)
-     // id: lists_recyclerview => listsRecyclerview
         binding.listsRecyclerview.layoutManager = LinearLayoutManager(requireContext())
-
         return binding.root
     }
 

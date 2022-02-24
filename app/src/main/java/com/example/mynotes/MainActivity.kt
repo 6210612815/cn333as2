@@ -20,13 +20,11 @@ import com.example.mynotes.ui.main.MainFragment
 import com.example.mynotes.ui.main.MainViewModel
 import com.example.mynotes.ui.main.MainViewModelFactory
 
-
-
 class MainActivity : AppCompatActivity(), MainFragment.MainFragmentInteractionListener {
     private lateinit var binding: MainActivityBinding
     private lateinit var viewModel: MainViewModel
-    lateinit var plainText: EditText
     lateinit var sharedPreferences: SharedPreferences
+    lateinit var plainText: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +43,6 @@ class MainActivity : AppCompatActivity(), MainFragment.MainFragmentInteractionLi
             else {
                 R.id.xl_main_fragment_container
             }
-
             supportFragmentManager.commit {
                 setReorderingAllowed(true)
                 add(fragmentContainerViewId, mainFragment)
@@ -60,12 +57,13 @@ class MainActivity : AppCompatActivity(), MainFragment.MainFragmentInteractionLi
     private fun showCreateListDialog() {
         val dialogTitle = getString(R.string.name_of_list)
         val positiveButtonTitle = getString(R.string.create_list)
-
         val builder = AlertDialog.Builder(this)
         val listTitleEditText = EditText(this)
+
         listTitleEditText.inputType = InputType.TYPE_CLASS_TEXT
 
         builder.setTitle(dialogTitle)
+
         builder.setView(listTitleEditText)
 
         builder.setPositiveButton(positiveButtonTitle) { dialog, _ ->
@@ -74,7 +72,6 @@ class MainActivity : AppCompatActivity(), MainFragment.MainFragmentInteractionLi
             viewModel.saveList(taskList)
             showListDetail(taskList)
         }
-
         builder.create().show()
     }
 
@@ -91,7 +88,6 @@ class MainActivity : AppCompatActivity(), MainFragment.MainFragmentInteractionLi
                 replace(R.id.xl_list_detail_fragment_container, ListDetailFragment::class.java, bundle, null)
             }
             binding.taskListAddButton.setOnClickListener {
-
             }
         }
     }
@@ -118,12 +114,10 @@ class MainActivity : AppCompatActivity(), MainFragment.MainFragmentInteractionLi
 
     fun LoadEditText() {
         if (binding.xlListDetailFragmentContainer != null){
-
             sharedPreferences = getSharedPreferences("", MODE_PRIVATE)
             plainText = findViewById(R.id.plainText)
             var loadnote = sharedPreferences.getString(LIST_NAME,"")
             plainText.setText(loadnote)
-
         }
     }
 
@@ -132,10 +126,7 @@ class MainActivity : AppCompatActivity(), MainFragment.MainFragmentInteractionLi
             sharedPreferences = getSharedPreferences("", Context.MODE_PRIVATE)
             plainText = findViewById(R.id.plainText)
             val insertedText = plainText.text.toString()
-
             sharedPreferences.edit().putString(viewModel.list.name,insertedText).apply()
-
-
             title = resources.getString(R.string.app_name)
             supportFragmentManager.commit {
                 setReorderingAllowed(true)

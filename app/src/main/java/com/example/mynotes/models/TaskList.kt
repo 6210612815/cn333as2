@@ -7,8 +7,7 @@ class TaskList(val name: String, val tasks: ArrayList<String> = ArrayList()) : P
     constructor(parcel: Parcel) : this(
         parcel.readString()!!,
         parcel.createStringArrayList()!!
-    ) {
-    }
+    )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(name)

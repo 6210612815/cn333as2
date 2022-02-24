@@ -15,12 +15,11 @@ import com.example.mynotes.ui.main.MainViewModelFactory
 
 class ListDetailFragment : Fragment() {
     lateinit var binding: ListDetailFragmentBinding
+    private lateinit var viewModel: MainViewModel
 
     companion object {
         fun newInstance() = ListDetailFragment()
     }
-
-    private lateinit var viewModel: MainViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,7 +28,6 @@ class ListDetailFragment : Fragment() {
         binding = ListDetailFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
-
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -55,10 +53,5 @@ class ListDetailFragment : Fragment() {
         finally {
 
         }
-
-
-
     }
-
-
 }

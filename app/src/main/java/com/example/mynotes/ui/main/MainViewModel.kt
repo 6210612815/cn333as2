@@ -7,14 +7,12 @@ import com.example.mynotes.models.TaskList
 class MainViewModel(private val sharedPreferences: SharedPreferences) : ViewModel() {
     lateinit var onTaskAdded: () -> Unit
     lateinit var list: TaskList
-
     lateinit var onListAdded: (() -> Unit)
 
     val lists: MutableList<TaskList> by lazy {
         retrieveLists()
     }
 
-    // key: list-name, value: hashset (list of items)
     private fun retrieveLists(): MutableList<TaskList> {
         val sharedPreferencesContents = sharedPreferences.all
         val taskLists = ArrayList<TaskList>()
@@ -24,7 +22,6 @@ class MainViewModel(private val sharedPreferences: SharedPreferences) : ViewMode
             val list = TaskList(taskList.key, itemsHashSet)
             taskLists.add(list)
         }
-
         return taskLists
     }
 
@@ -42,10 +39,5 @@ class MainViewModel(private val sharedPreferences: SharedPreferences) : ViewMode
     fun refreshLists() {
         lists.clear()
         lists.addAll(retrieveLists())
-    }
-
-    fun addTask(task: String) {
-        list.tasks.add(task)
-        onTaskAdded.invoke()
     }
 }
